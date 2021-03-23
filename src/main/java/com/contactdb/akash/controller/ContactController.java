@@ -22,17 +22,33 @@ public class ContactController {
 	@Autowired
 	ContactRepository contactRepository;
 
-	
+	/**
+	 * This API is for fetching all contacts in Database
+	 * 
+	 * */
+
 	@GetMapping
 	public ResponseEntity<?> getAll() {
 		return ResponseEntity.ok(contactRepository.findAll());
 	}
+	
+	/**
+	 * 
+	 * This API is for retrieving one single contact on Id
+	 * 
+	 * */
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getOne(@PathVariable long id) {
 		return ResponseEntity.ok(contactRepository.findById(id));
 	}
 
+	/**
+	 * 
+	 * This API is saving contact in Database
+	 * 
+	 * */
+	
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Contact contact){
 		
@@ -43,6 +59,12 @@ public class ContactController {
 		return new ResponseEntity<Contact>(contact,HttpStatus.CREATED);
 	}
 	
+	/**
+	 * 
+	 * This API is for deleting one single contact on Id
+	 * 
+	 * */
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable long id){
 		if(!contactRepository.existsById(id))
@@ -52,11 +74,24 @@ public class ContactController {
 			return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	/**
+	 * 
+	 * This API is for updating contact 
+	 * 
+	 * */
+	
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Contact contact){
 		contact = contactRepository.save(contact);
 		return new ResponseEntity<Contact>(contact,HttpStatus.OK);
 	}
+	
+	
+	/**
+	 * 
+	 * This API is for fetching contacts on city name
+	 * 
+	 * */
 	
 	@GetMapping("/city/{name}")
 	public ResponseEntity<?> contactsOfTown(@PathVariable String name){
