@@ -60,7 +60,7 @@ public class ContactController {
 	
 	@GetMapping("/city/{name}")
 	public ResponseEntity<?> contactsOfTown(@PathVariable String name){
-		return ResponseEntity.ok(contactRepository.findByAddress_City(name));
+		return ResponseEntity.ok(contactRepository.findByAddress_CityIgnoreCase(name));
 	}
 	
 	
